@@ -18,12 +18,31 @@
 
 @section('content')
 
+    
 <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md">
+    
+    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+    <script>
+    tinymce.init({
+        selector: '#description',
+        plugins: 'code table lists',
+        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+    });
+    </script> -->
 
     <h2 class="text-2xl font-bold text-primary mb-6">
         Create New Task
     </h2>
 
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>• {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="/tasks">
         @csrf
 
@@ -54,13 +73,14 @@
             <label class="block text-gray-700 mb-2 font-medium">
                 Description
             </label>
-
-            <textarea 
+            <x-forms.tinymce-editor/>
+            <!-- <textarea 
                 name="description"
+                id="description"
                 rows="4"
                 placeholder="Enter task description (optional)"
                 class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            >{{ old('description') }}</textarea>
+            >{{ old('description') }}</textarea> -->
 
             @error('description')
                 <p class="text-red-500 text-sm mt-1">
@@ -84,9 +104,9 @@
             </button>
 
         </div>
-
+        
     </form>
-
+    
 </div>
-
 @endsection
+
