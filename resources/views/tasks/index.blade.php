@@ -62,7 +62,7 @@
                </p>
            @endif
              <!-- EDIT (only if not deleted) -->
-            @if(!$task->deleted_at)
+            @if(!$task->deleted_at && auth()->user()->role === 'user')
                 <a href="/tasks/{{ $task->id }}/edit"
                 class="text-green-600 hover:bg-green-600 hover:text-white border border-green-600 px-3 py-1.5 rounded-md">
                 Edit
