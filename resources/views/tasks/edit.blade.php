@@ -52,6 +52,7 @@
 
             <textarea 
                 name="description"
+                id="description"
                 rows="4"
                 class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
             >{{ old('description', $task->description) }}</textarea>
