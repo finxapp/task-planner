@@ -1,19 +1,3 @@
-<!-- <h2>Create Task</h2>
-
-<form method="POST" action="/tasks">
-    @csrf
-
-    <input type="text" name="title" placeholder="Task Title">
-    <br><br>
-
-    <textarea name="description" placeholder="Task Description"></textarea>
-    <br><br>
-
-    <button type="submit">Create Task</button>
-</form>
-
-<a href="/tasks">Back</a> -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -21,17 +5,9 @@
     
 <div class="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-md">
     
-    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
-    <script>
-    tinymce.init({
-        selector: '#description',
-        plugins: 'code table lists',
-        toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
-    });
-    </script> -->
-
+    
     <h2 class="text-2xl font-bold text-primary mb-6">
-        Create New Task
+        Create New Blog
     </h2>
 
     @if ($errors->any())
@@ -43,7 +19,7 @@
             </ul>
         </div>
     @endif
-    <form method="POST" action="/tasks">
+    <form method="POST" action="/blogs">
         @csrf
 
         <!-- Title -->
@@ -68,21 +44,20 @@
             @enderror
         </div>
 
-        <!-- Description -->
+        <!-- Content -->
         <div class="mb-6">
             <label class="block text-gray-700 mb-2 font-medium">
-                Description
+                Content
             </label>
-            <x-forms.tinymce-editor/>
-            <!-- <textarea 
-                name="description"
+             <textarea 
+                name="content"
                 id="description"
                 rows="4"
-                placeholder="Enter task description (optional)"
-                class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            >{{ old('description') }}</textarea> -->
-
-            @error('description')
+                class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+            >{{ old('content') }}</textarea>
+       
+            
+            @error('content')
                 <p class="text-red-500 text-sm mt-1">
                     {{ $message }}
                 </p>
@@ -92,17 +67,12 @@
         <!-- Buttons -->
         <div class="flex justify-between items-center">
 
-            <a href="/tasks" 
+            <a href="/blogs" 
                class="text-gray-600 hover:text-green-600 transition">
                 Cancel
             </a>
 
-            <!-- <button 
-                type="submit"
-                class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
-                Create Task
-            </button> -->
-            <x-button variant="primary">Create Task</x-button>
+            <x-button variant="primary">Create Blog</x-button>
 
         </div>
         

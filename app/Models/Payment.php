@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Payment extends Model
+{
+    protected $fillable = [
+        'user_id',
+        'blog_id',
+        'payment_reference'
+    ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    
+    public function blog(){
+       return $this->belongsTo(\App\Models\Blog::class);
+   }
+    // public function task(){
+    //     return $this->belongsTo(Task::class);
+    // }
+
+}

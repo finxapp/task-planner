@@ -126,7 +126,11 @@ php artisan tinker
 **Then:**
 
 ```bash 
-$user = App\Models\User::find(1);
-$user->role = 'supervisor';
-$user->save();
+# $user = App\Models\User::find(1);
+# $user->role = 'supervisor';
+# $user->save();
+App\Models\User::find(5)->assignRole('user')
+App\Models\User::find(1)->assignRole('supervisor')
+App\Models\User::find(7)->assignRole('admin')
+App\Models\User::find(6)->assignRole('superadmin')
 ```

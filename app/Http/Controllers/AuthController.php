@@ -32,11 +32,15 @@ class AuthController extends Controller
         //     'password'=>Hash::make($request->password)
         // ]);
 
-        User::create([
+        $user =  User::create([
             'name'=>strip_tags($validated['name']),
             'email'=>$validated['email'],
             'password'=>Hash::make($validated['password'])
         ]);
+
+        // assign default role
+        $user->assignRole('user');
+
 
         // return redirect('/login');
          return redirect('/login')->with('success','Account created successfully');
@@ -47,18 +51,29 @@ class AuthController extends Controller
     }
 
     public function login(Request $request) {
-        // if(Auth::attempt($request->only('email','password'))) {
+
+        //  $request->validate([
+        //     'email'=>'required|email',
+        //     'password'=>'required'
+        // ]);
+
+        //  if(Auth::attempt($request->only('email','password'))) {
         //     return redirect('/tasks');
         // }
-        // return back()->with('error','Invalid credentials');
 
-         $request->validate([
-            'email'=>'required|email',
-            'password'=>'required'
-        ]);
+        // return back()->with('error','Invalid credentials')->withInput();
 
-         if(Auth::attempt($request->only('email','password'))) {
-            return redirect('/tasks');
+        $credentials = $request->only('email','password');
+
+        $user = User::where('email',$request->email)->first();
+        // dd($user);
+        if ($user && $user->trashed()) {
+            return back()->with('error','Account disabled');
+        }
+
+        if(Auth::attempt($credentials)) {
+            // return redirect('/tasks');
+            return redirect()->intended('/blogs');
         }
 
         return back()->with('error','Invalid credentials')->withInput();

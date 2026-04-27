@@ -29,7 +29,6 @@
         @csrf
         @method('PUT')
 
-        <!-- Title -->
         <div class="mb-4">
             <label class="block text-gray-700 mb-2 font-medium">
                 Title
@@ -44,7 +43,6 @@
             >
         </div>
 
-        <!-- Description -->
         <div class="mb-6">
             <label class="block text-gray-700 mb-2 font-medium">
                 Description
@@ -66,12 +64,12 @@
                 Cancel
             </a>
 
-            <button 
+            <!-- <button 
                 type="submit"
                 class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
                 Update Task
-            </button>
-
+            </button> -->
+            <x-button variant="primary">Update Task</x-button>
         </div>
 
     </form>
